@@ -1,64 +1,82 @@
+/* script.js – чистый, с micro-interactions и a11y */
 const tg = window.Telegram.WebApp;
-tg.ready();
-tg.expand();
+tg.ready(); tg.expand();
 
-// Init data для auth
-const user = tg.initDataUnsafe.user;
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
 
-// Tabs
-document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(e.target.dataset.tab).classList.add('active');
-        e.target.classList.add('active');
-    });
-});
-
-// Upload photo
-const photoInput = document.getElementById('photoInput');
-const processBtn = document.getElementById('processBtn');
 let selectedPhoto = null;
 let selectedTemplate = null;
 
-photoInput.addEventListener('change', (e) => {
+/* ---------- TAB SWITCH ---------- */
+$$('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+
+        $$('.tab').forEach(t => t.classList.remove('active'));
+        $(`#${target}`).classList.add('active');
+
+        $$('.nav-btn').forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+    });
+});
+
+/* ---------- PHOTO ---------- */
+const photoInput = $('#photoInput');
+const uploadLabel = $('#uploadLabel');
+const preview = $('#preview');
+const previewImg = $('#previewImg');
+const clearBtn = $('#clearPreview');
+
+photoInput.addEventListener('change', e => {
     const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-            selectedPhoto = ev.target.result.split(',')[1];  // Base64
-            processBtn.disabled = !selectedTemplate;
-        };
-        reader.readAsDataURL(file);
-    }
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = ev => {
+        selectedPhoto = ev.target.result.split(',')[1];
+        previewImg.src = ev.target.result;
+        preview.classList.remove('hidden');
+        checkReady();
+    };
+    reader.readAsDataURL(file);
 });
 
-// Select template
-document.querySelectorAll('#templates button').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        selectedTemplate = e.target.dataset.template;
-        processBtn.disabled = !selectedPhoto;
+clearBtn.addEventListener('click', () => {
+    photoInput.value = '';
+    selectedPhoto = null;
+    preview.classList.add('hidden');
+    checkReady();
+});
+
+/* ---------- TEMPLATES ---------- */
+$$('.template-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        $$('.template-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedTemplate = btn.dataset.template;
+        checkReady();
     });
 });
 
-// Process
+/* ---------- PROCESS ---------- */
+const processBtn = $('#processBtn');
 processBtn.addEventListener('click', () => {
-    if (selectedPhoto && selectedTemplate) {
-        const data = {
-            photo: selectedPhoto,
-            template_id: selectedTemplate
-        };
-        tg.sendData(JSON.stringify(data));  // Отправка в бот
-        tg.showAlert('Обработка запущена!');
-    }
+    if (!selectedPhoto || !selectedTemplate) return;
+
+    const payload = JSON.stringify({ photo: selectedPhoto, template_id: selectedTemplate });
+    tg.sendData(payload);
+    tg.showPopup({ message: 'Обработка запущена!' });
 });
 
-document.querySelectorAll('.template-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
+/* ---------- HELPERS ---------- */
+function checkReady() {
+    processBtn.disabled = !(selectedPhoto && selectedTemplate);
+}
 
-        selectedTemplate = e.target.dataset.template;
-        processBtn.disabled = !selectedPhoto;
-    });
-});
+/* ---------- INITIAL STATE ---------- */
+checkReady();

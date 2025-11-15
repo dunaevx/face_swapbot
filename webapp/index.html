@@ -5,64 +5,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StickyFace</title>
+
+    <!-- Google Fonts – Inter + Manrope (для акцентов) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons – Phosphor (lightweight) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 
 <body>
-    <div id="app">
-        <!-- Home -->
+    <div id="app" class="app">
+        <!-- ==== HOME ==== -->
         <section id="home" class="tab active">
-            <h1 class="title">Загрузить фото</h1>
+            <header class="section-header">
+                <h1 class="section-title"><i class="ph ph-camera"></i> Загрузить фото</h1>
+            </header>
 
-            <label class="file-upload">
+            <!-- File Upload Card -->
+            <label class="upload-card" id="uploadLabel">
                 <input type="file" id="photoInput" accept="image/*" capture="camera">
-                <span>Выбрать фото</span>
+                <div class="upload-content">
+                    <i class="ph ph-image upload-icon"></i>
+                    <p class="upload-text">Нажмите, чтобы выбрать фото</p>
+                    <span class="upload-hint">или сделайте снимок камерой</span>
+                </div>
             </label>
 
-            <div id="templates" class="card">
-                <h2>Выбери стиль</h2>
+            <!-- Preview (appears after upload) -->
+            <div id="preview" class="preview hidden">
+                <img id="previewImg" src="" alt="Предпросмотр">
+                <button id="clearPreview" class="clear-btn"><i class="ph ph-x"></i></button>
+            </div>
+
+            <!-- Templates Card -->
+            <div class="card">
+                <h2 class="card-title"><i class="ph ph-palette"></i> Выберите шаблон</h2>
                 <div class="templates-grid">
-                    <button class="template-btn" data-template="template1">Стиль 1</button>
-                    <button class="template-btn" data-template="template2">Стиль 2</button>
-                    <button class="template-btn" data-template="template3">Стиль 3</button>
+                    <button class="template-btn" data-template="template1">
+                        <img src="https://via.placeholder.com/80/2C3E50/FFFFFF?text=1" alt="Шаблон 1">
+                        <span>Шаблон 1</span>
+                    </button>
+                    <button class="template-btn" data-template="template2">
+                        <img src="https://via.placeholder.com/80/34495E/FFFFFF?text=2" alt="Шаблон 2">
+                        <span>Шаблон 2</span>
+                    </button>
+                    <button class="template-btn" data-template="template3">
+                        <img src="https://via.placeholder.com/80/1ABC9C/FFFFFF?text=3" alt="Шаблон 3">
+                        <span>Шаблон 3</span>
+                    </button>
                 </div>
             </div>
 
-            <button id="processBtn" class="primary-btn" disabled>Создать</button>
+            <!-- Process Button -->
+            <button id="processBtn" class="primary-btn" disabled>
+                <span class="btn-text">Обработать</span>
+                <i class="ph ph-arrow-right btn-icon"></i>
+            </button>
         </section>
 
-        <!-- Gallery -->
+        <!-- ==== GALLERY ==== -->
         <section id="gallery" class="tab">
-            <h1 class="title">Галерея</h1>
-            <div class="placeholder">
-                Ваша история будет доступна позже.
-            </div>
+            <header class="section-header">
+                <h1 class="section-title"><i class="ph ph-images"></i> Галерея</h1>
+            </header>
+            <p class="placeholder">История будет доступна после интеграции с сервером.</p>
         </section>
 
-        <!-- Profile -->
+        <!-- ==== PROFILE ==== -->
         <section id="profile" class="tab">
-            <h1 class="title">Профиль</h1>
-
-            <div class="list">
-                <a href="#">Как это работает</a>
-                <a href="#">Связаться с поддержкой</a>
-                <a href="#">Политика конфиденциальности</a>
-                <a href="#">Условия использования</a>
-            </div>
+            <header class="section-header">
+                <h1 class="section-title"><i class="ph ph-user"></i> Профиль</h1>
+            </header>
+            <ul class="profile-list">
+                <li><a href="#"><i class="ph ph-question"></i> Как это работает</a></li>
+                <li><a href="#"><i class="ph ph-headset"></i> Поддержка</a></li>
+                <li><a href="#"><i class="ph ph-shield-check"></i> Конфиденциальность</a></li>
+                <li><a href="#"><i class="ph ph-file-text"></i> Условия использования</a></li>
+            </ul>
         </section>
 
-        <!-- Bottom menu -->
-        <nav class="bottom-nav">
-            <button data-tab="home" class="nav-btn active">
-                <span>Главная</span>
+        <!-- ==== BOTTOM NAV ==== -->
+        <nav class="bottom-nav" role="tablist" aria-label="Навигация">
+            <button class="nav-btn active" data-tab="home" aria-controls="home" aria-selected="true">
+                <i class="ph ph-house"></i><span>Главная</span>
             </button>
-            <button data-tab="gallery" class="nav-btn">
-                <span>Галерея</span>
+            <button class="nav-btn" data-tab="gallery" aria-controls="gallery" aria-selected="false">
+                <i class="ph ph-images"></i><span>Галерея</span>
             </button>
-            <button data-tab="profile" class="nav-btn">
-                <span>Профиль</span>
+            <button class="nav-btn" data-tab="profile" aria-controls="profile" aria-selected="false">
+                <i class="ph ph-user"></i><span>Профиль</span>
             </button>
         </nav>
     </div>
+
+    <script src="script.js"></script>
 </body>
+
+</html>
