@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StickyFace</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Главная: Upload -->
+        <section id="home" class="tab active">
+            <h1>Загрузить моё фото</h1>
+            <input type="file" id="photoInput" accept="image/*" capture="camera">
+            <div id="templates">
+                <h2>Выбери шаблон</h2>
+                <button data-template="template1">Шаблон 1</button>
+                <button data-template="template2">Шаблон 2</button>
+                <button data-template="template3">Шаблон 3</button>
+            </div>
+            <button id="processBtn" disabled>Обработать</button>
+        </section>
+
+        <!-- Галерея: История (заглушка) -->
+        <section id="gallery" class="tab">
+            <h1>Галерея</h1>
+            <p>Ваша история обработок (интеграция с БД через API в будущем).</p>
+        </section>
+
+        <!-- Профиль -->
+        <section id="profile" class="tab">
+            <h1>Профиль</h1>
+            <ul>
+                <li><a href="#">Как это работает</a></li>
+                <li><a href="#">Связаться с поддержкой</a></li>
+                <li><a href="#">Политика конфиденциальности</a></li>
+                <li><a href="#">Условия использования</a></li>
+            </ul>
+        </section>
+
+        <!-- Bottom Menu -->
+        <nav class="bottom-nav">
+            <button data-tab="home" class="nav-btn active">Главная</button>
+            <button data-tab="gallery" class="nav-btn">Галерея</button>
+            <button data-tab="profile" class="nav-btn">Профиль</button>
+        </nav>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

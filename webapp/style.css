@@ -1,0 +1,68 @@
+body {
+    background: #000;
+    color: #fff;
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+}
+
+.tab {
+    display: none;
+    padding: 20px;
+}
+
+.tab.active {
+    display: block;
+}
+
+h1 {
+    color: #00ff00;
+}
+
+button {
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+input[type=file] {
+    color: #fff;
+    background: #222;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.nav-btn {
+    background: none;
+    color: #fff;
+    border: none;
+    padding: 10px;
+}
+
+.nav-btn.active {
+    color: #00ff00;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li a {
+    color: #aaa;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
