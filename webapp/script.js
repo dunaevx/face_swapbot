@@ -52,3 +52,13 @@ processBtn.addEventListener('click', () => {
         tg.showAlert('Обработка запущена!');
     }
 });
+
+document.querySelectorAll('.template-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+
+        selectedTemplate = e.target.dataset.template;
+        processBtn.disabled = !selectedPhoto;
+    });
+});

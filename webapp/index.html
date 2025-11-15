@@ -1,54 +1,57 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StickyFace</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
-
 <body>
     <div id="app">
-        <!-- Главная: Upload -->
+        <!-- Home -->
         <section id="home" class="tab active">
-            <h1>Загрузить моё фото</h1>
-            <input type="file" id="photoInput" accept="image/*" capture="camera">
-            <div id="templates">
-                <h2>Выбери шаблон</h2>
-                <button data-template="template1">Шаблон 1</button>
-                <button data-template="template2">Шаблон 2</button>
-                <button data-template="template3">Шаблон 3</button>
+            <h1 class="title">Загрузить фото</h1>
+
+            <label class="file-upload">
+                <input type="file" id="photoInput" accept="image/*" capture="camera">
+                <span>Выбрать фото</span>
+            </label>
+
+            <div id="templates" class="card">
+                <h2>Выбери стиль</h2>
+                <div class="templates-grid">
+                    <button class="template-btn" data-template="template1">Стиль 1</button>
+                    <button class="template-btn" data-template="template2">Стиль 2</button>
+                    <button class="template-btn" data-template="template3">Стиль 3</button>
+                </div>
             </div>
-            <button id="processBtn" disabled>Обработать</button>
+
+            <button id="processBtn" class="primary-btn" disabled>Создать</button>
         </section>
 
-        <!-- Галерея: История (заглушка) -->
+        <!-- Gallery -->
         <section id="gallery" class="tab">
-            <h1>Галерея</h1>
-            <p>Ваша история обработок (интеграция с БД через API в будущем).</p>
+            <h1 class="title">Галерея</h1>
+            <div class="placeholder">
+                Ваша история будет доступна позже.
+            </div>
         </section>
 
-        <!-- Профиль -->
+        <!-- Profile -->
         <section id="profile" class="tab">
-            <h1>Профиль</h1>
-            <ul>
-                <li><a href="#">Как это работает</a></li>
-                <li><a href="#">Связаться с поддержкой</a></li>
-                <li><a href="#">Политика конфиденциальности</a></li>
-                <li><a href="#">Условия использования</a></li>
-            </ul>
+            <h1 class="title">Профиль</h1>
+
+            <div class="list">
+                <a href="#">Как это работает</a>
+                <a href="#">Связаться с поддержкой</a>
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Условия использования</a>
+            </div>
         </section>
 
-        <!-- Bottom Menu -->
+        <!-- Bottom menu -->
         <nav class="bottom-nav">
-            <button data-tab="home" class="nav-btn active">Главная</button>
-            <button data-tab="gallery" class="nav-btn">Галерея</button>
-            <button data-tab="profile" class="nav-btn">Профиль</button>
+            <button data-tab="home" class="nav-btn active">
+                <span>Главная</span>
+            </button>
+            <button data-tab="gallery" class="nav-btn">
+                <span>Галерея</span>
+            </button>
+            <button data-tab="profile" class="nav-btn">
+                <span>Профиль</span>
+            </button>
         </nav>
     </div>
-    <script src="script.js"></script>
 </body>
-
-</html>

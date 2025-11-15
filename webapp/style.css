@@ -1,9 +1,13 @@
+/* ===== BASE ===== */
 body {
-    background: #000;
+    background: #0c0c0c;
     color: #fff;
-    font-family: Arial;
     margin: 0;
-    padding: 0;
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+#app {
+    padding-bottom: 80px;
 }
 
 .tab {
@@ -15,29 +19,119 @@ body {
     display: block;
 }
 
-h1 {
-    color: #00ff00;
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
-button {
-    background: #333;
-    color: #fff;
-    border: 1px solid #555;
+/* ===== FILE UPLOAD ===== */
+.file-upload {
+    display: block;
+    background: linear-gradient(145deg, #1a1a1a, #101010);
+    border: 1px solid #1f1f1f;
+    padding: 15px;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: 0.25s;
+}
+
+.file-upload:hover {
+    border-color: #555;
+}
+
+.file-upload input {
+    display: none;
+}
+
+/* ===== TEMPLATE SELECTION ===== */
+.card {
+    background: #141414;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #1c1c1c;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.templates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.template-btn {
+    background: #1a1a1a;
+    border: 1px solid #232323;
     padding: 10px;
-    margin: 5px;
-    border-radius: 5px;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #ddd;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-input[type=file] {
-    color: #fff;
+.template-btn:hover {
     background: #222;
 }
 
+.template-btn.active {
+    border-color: #4bf24b;
+    background: #152d15;
+}
+
+/* ===== PRIMARY BUTTON ===== */
+.primary-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(90deg, #2bd92b, #4bf24b);
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.primary-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+/* ===== PROFILE LIST ===== */
+.list a {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px solid #222;
+    color: #bbb;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* ===== PLACEHOLDER ===== */
+.placeholder {
+    opacity: 0.7;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+/* ===== BOTTOM NAV ===== */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: #111;
+    background: #101010;
+    border-top: 1px solid #1c1c1c;
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
@@ -45,24 +139,12 @@ input[type=file] {
 
 .nav-btn {
     background: none;
-    color: #fff;
     border: none;
+    color: #666;
+    font-size: 14px;
     padding: 10px;
 }
 
 .nav-btn.active {
-    color: #00ff00;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li a {
-    color: #aaa;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    border-bottom: 1px solid #333;
+    color: #4bf24b;
 }
